@@ -294,7 +294,8 @@ static unsigned long change_ldt(unsigned long text_size, unsigned long * page)
  * 'do_execve()'函数执行一个新程序.
  */
 // execve()系统中断调用函数.加载并执行子进程(其他程序).
-// 该函数是系统中断调用(int 0x80)功能号__NR_execve调用的函数.函数的参数是进入系统调用处理过程后直到调用本系统调用处理过程和调用本函数之前逐步压入栈中的值.这些值包括:
+// 该函数是系统中断调用(int 0x80)功能号__NR_execve调用的函数.函数的参数是进入系统调用处理过程
+// 后直到调用本系统调用处理过程和调用本函数之前逐步压入栈中的值.这些值包括:
 // 1第86--88行入堆的edx,ecx和ebx寄存器值,分别对应**envp,**argv和*filename;
 // 2第94行调用sys_call_table中sys_execve函数(指针)时压入栈的函数返回地址(tmp);
 // 3第202行在调用本函数do_execve前入栈的指向栈中调用系统中断的程序代码指针eip.
@@ -303,7 +304,7 @@ static unsigned long change_ldt(unsigned long text_size, unsigned long * page)
 // tmp - 系统中断在调用sys_execve时的返回地址,无用.
 // filename - 被执行程序文件名指针;
 // argv - 命令行参数指针数组的指针;
-// envp - 环境变更指针数组的指针.
+// envp - 环境变量指针数组的指针.
 // 返回:如果调用成功,则不返回;否则设置出错号,并返回-1.
 int do_execve(unsigned long * eip, long tmp, char * filename,
 	char ** argv, char ** envp)

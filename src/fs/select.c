@@ -42,11 +42,14 @@
  * 太多的损失：因为当我们不在执行本任务时睡眠状态会自动释放中断（即其他任务会使用自己EFLAGS中的中断标志）。
  */
 
+// wait_address指向当前正在处理的描述符对应的任务等待等待惠烈头指针
+// old_task指向等待队列指针原来指向的等待任务
 typedef struct {
 	struct task_struct * old_task;
 	struct task_struct ** wait_address;
 } wait_entry;
 
+// nr记录描述符集中描述符等待在相关等待队列上的wait_entry数
 typedef struct {
 	int nr;
 	wait_entry entry[NR_OPEN * 3];
